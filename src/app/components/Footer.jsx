@@ -24,6 +24,7 @@ export default class Footer extends React.Component {
     this.updateInterval = this.updateInterval.bind(this)
     this.openGitHubLink = this.openGitHubLink.bind(this)
     this.renderIntervalOptions = this.renderIntervalOptions.bind(this)
+    this.renderRightButtonGroup = this.renderRightButtonGroup.bind(this)
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -79,7 +80,7 @@ export default class Footer extends React.Component {
       )
     } else {
       return (
-        <button className='btn btn-default' onClick={this.openGitHubLink}>
+        <button className='btn btn-default pull-right' onClick={this.openGitHubLink}>
           <span className='icon icon-github icon-text' />
           v{pkg.version}
         </button>
@@ -99,15 +100,7 @@ export default class Footer extends React.Component {
             </button>
             {this.renderIntervalOptions()}
           </div>
-          <div className='btn-group pull-right'>
-            <button className='btn btn-default' onClick={this.openGitHubLink}>
-              <span className='icon icon-github icon-text' />
-              v{pkg.version}
-            </button>
-            <button className='btn btn-default' onClick={this.quit}>
-              <span className='icon icon-cancel' />
-            </button>
-          </div>
+          {this.renderRightButtonGroup()}
         </div>
       </footer>
     )
