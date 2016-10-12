@@ -1,0 +1,27 @@
+{
+  "name": "donut",
+  "productName": "Donut",
+  "description": "Cross platform cryptocurrency tracker",
+  "homepage": "https://github.com/harshjv/donut",
+  "license": "MIT",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/harshjv/donut",
+  "keywords": [
+    "donut",
+    "cryptocurrency",
+    "bitcoin",
+    "price",
+    "tracker",
+    "altcoin",
+    "ethereum"
+  ],
+  "author": {
+    "name": "Harsh Vakharia",
+    "email": "harshjv@gmail.com",
+    "url": "https://harshjv.github.io"
+  },
+  "dependencies": {
+    "menubar": "^5.1.0"
+  }
+}

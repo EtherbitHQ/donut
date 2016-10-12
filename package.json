@@ -1,0 +1,64 @@
+{
+  "name": "donut",
+  "version": "1.0.0",
+  "description": "Cross platform cryptocurrency tracker",
+  "main": "main.js",
+  "scripts": {
+    "setup": "bower install && cd src && npm install && cd .. && gulp setup && install-app-deps ",
+    "start": "electron ./app",
+    "pack": "build --dir",
+    "dist": "build",
+    "postinstall": "npm run setup"
+  },
+  "repository": "https://github.com/harshjv/donut",
+  "keywords": [
+    "donut",
+    "cryptocurrency",
+    "bitcoin",
+    "ethereum"
+  ],
+  "author": {
+    "name": "Harsh Vakharia",
+    "email": "harshjv@gmail.com",
+    "url": "https://harshjv.github.io"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babelify": "^7.3.0",
+    "bower": "^1.7.9",
+    "browserify": "^13.1.0",
+    "electron": "^1.4.1",
+    "electron-builder": "^7.11.4",
+    "envify": "^3.4.1",
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "uglifyify": "^3.0.3",
+    "vinyl-source-stream": "^1.1.0",
+    "classnames": "^2.2.5",
+    "humanize-duration": "^3.9.1",
+    "flux": "^3.0.0",
+    "keymirror": "^0.1.1",
+    "numeral": "^1.5.3",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-search-input": "^0.10.3",
+    "request": "^2.75.0"
+  },
+  "build": {
+    "appId": "com.harshjv.donut",
+    "productName": "Donut",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "category": "Utility",
+      "target": [ "AppImage", "deb", "rpm", "freebsd", "zip" ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "donut",
+  "description": "Cryptocurrency Tracker",
+  "main": "main.js",
+  "authors": [
+    "Harsh Vakharia <harshjv@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "donut",
+    "cryptocurrency",
+    "bitcoin",
+    "ethereum"
+  ],
+  "homepage": "https://github.com/harshjv/donut",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "cryptocoins": "allienworks/cryptocoins",
+    "photon": "connors/photon#^0.1.2-alpha"
+  }
+}
