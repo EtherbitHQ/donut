@@ -15,8 +15,18 @@
   <a href="https://github.com/harshjv/donut/blob/master/LICENSE"><img src="https://img.shields.io/github/license/harshjv/donut.svg?maxAge=2592000" alt="license"></a>
 </p>
 
-<h4 align="center">Preview</h4>
 
-<p align="center">
-  <a href="https://github.com/harshjv/donut"><img src="./donut.gif" alt="Preview"></a>
-</p>
+## Preview
+
+[![Preview](./donut.gif)](https://github.com/harshjv/donut)
+
+
+## Download
+
+Builds are available for **macOS**, **Debian/Ubuntu**, **FreeBSD** and **Windows**.
+
+Visit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)
+
+## License
+
+MIT
