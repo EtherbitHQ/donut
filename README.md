@@ -14,3 +14,9 @@
   <a href="https://github.com/harshjv/donut/blob/master/package.json"><img src="https://img.shields.io/david/dev/harshjv/donut.svg?maxAge=2592000" alt="David"></a>
   <a href="https://github.com/harshjv/donut/blob/master/LICENSE"><img src="https://img.shields.io/github/license/harshjv/donut.svg?maxAge=2592000" alt="license"></a>
 </p>
+
+<h4 align="center">Preview</h4>
+
+<p align="center">
+  <a href="https://github.com/harshjv/donut"><img src="./donut.gif" alt="Preview"></a>
+</p>
