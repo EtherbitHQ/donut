@@ -27,6 +27,9 @@ Builds are available for **macOS**, **Debian/Ubuntu**, **FreeBSD** and **Windows
 
 Visit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)
 
+
 ## License
 
 MIT
+
+*Donut icon is designed by [Freepik](http://www.flaticon.com/authors/freepik)*
