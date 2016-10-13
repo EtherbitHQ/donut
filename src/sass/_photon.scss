@@ -1,0 +1,17 @@
+.toolbar-actions {
+  margin-bottom: 2px;
+}
+
+.toolbar-header {
+  padding: 8px 6px;
+}
+
+.search-bar > input {
+  @extend .form-control;
+
+  padding-left: 30px;
+  border-top-color: #c2c0c2;
+  border-right-color: #c2c0c2;
+  border-bottom-color: #a19fa1;
+  border-left-color: #c2c0c2;
+}

@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'photon-entypo-preload';
+  src: url('./fonts/photon-entypo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'cryptocoins-preload';
+  src: url('./fonts/cryptocoins.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i.cc {
+  font-family: 'cryptocoins-preload' !important;
+}
+
+.icon:before {
+  font-family: 'photon-entypo-preload' !important;
+}

@@ -63,7 +63,8 @@ export default class Footer extends React.Component {
   }
 
   openGitHubLink () {
-    shell.openExternal(pkg.homepage)
+    if (this.state.isUpdateAvailable) shell.openExternal(`${pkg.homepage}/releases`)
+    else shell.openExternal(pkg.homepage)
   }
 
   setUpdateInterval (interval = this.state.interval) {
@@ -89,7 +90,7 @@ export default class Footer extends React.Component {
   }
 
   renderRightButtonGroup () {
-    const title = this.state.isUpdateAvailable ? 'New version available' : this.state.version
+    const title = this.state.isUpdateAvailable ? 'Update available. Click this button to download new version.' : this.state.version
     const cls = classNames({
       'btn btn-default': true,
       'update-available': this.state.isUpdateAvailable,
