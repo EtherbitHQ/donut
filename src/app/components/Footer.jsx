@@ -21,7 +21,7 @@ export default class Footer extends React.Component {
     }
 
     this.quit = this.quit.bind(this)
-    this.updateInterval = this.updateInterval.bind(this)
+    this.setUpdateInterval = this.setUpdateInterval.bind(this)
     this.openGitHubLink = this.openGitHubLink.bind(this)
     this.renderIntervalOptions = this.renderIntervalOptions.bind(this)
     this.renderRightButtonGroup = this.renderRightButtonGroup.bind(this)
@@ -32,7 +32,7 @@ export default class Footer extends React.Component {
   }
 
   componentDidMount () {
-    this.updateInterval()
+    this.setUpdateInterval()()
   }
 
   quit () {
@@ -43,14 +43,14 @@ export default class Footer extends React.Component {
     shell.openExternal(pkg.homepage)
   }
 
-  updateInterval (interval = this.state.interval) {
+  setUpdateInterval (interval = this.state.interval) {
     return () => {
       this.setState({
         interval: interval
       })
 
       if (this.updateIntervalHandler) clearInterval(this.updateIntervalHandler)
-      this.updateIntervalHandler = setInterval(() => Actions.fetchData, interval)
+      this.updateIntervalHandler = setInterval(Actions.fetchData, interval)
     }
   }
 
@@ -61,7 +61,7 @@ export default class Footer extends React.Component {
         'active': interval === this.state.interval
       })
 
-      return <button className={cls} key={interval} onClick={this.updateInterval(interval)}>{duration(interval)}</button>
+      return <button className={cls} key={interval} onClick={this.setUpdateInterval(interval)}>{duration(interval)}</button>
     })
   }
 
