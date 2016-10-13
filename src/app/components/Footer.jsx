@@ -4,6 +4,8 @@ import classNames from 'classnames'
 
 const { ipcRenderer, shell } = window.require('electron')
 
+import versionStore from '../stores/VersionStore'
+
 import Actions from '../actions/Actions'
 import pkg from '../../package.json'
 import duration from '../utils/duration'
@@ -17,7 +19,9 @@ export default class Footer extends React.Component {
     super(props)
 
     this.state = {
-      interval: 60000
+      interval: 60000,
+      isUpdateAvailable: versionStore.isUpdateAvailable(),
+      version: versionStore.getVersion()
     }
 
     this.quit = this.quit.bind(this)
@@ -25,14 +29,33 @@ export default class Footer extends React.Component {
     this.openGitHubLink = this.openGitHubLink.bind(this)
     this.renderIntervalOptions = this.renderIntervalOptions.bind(this)
     this.renderRightButtonGroup = this.renderRightButtonGroup.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    return this.state.interval !== nextState.interval
+    return (
+      this.state.interval !== nextState.interval ||
+      this.state.isUpdateAvailable !== nextState.isUpdateAvailable ||
+      this.state.version !== nextState.version
+    )
   }
 
   componentDidMount () {
+    Actions.checkForUpdate()
     this.setUpdateInterval()()
+    versionStore.addChangeListener(this.onChange)
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.updateIntervalHandler)
+    versionStore.removeChangeListener(this.onChange)
+  }
+
+  onChange () {
+    this.setState({
+      isUpdateAvailable: versionStore.isUpdateAvailable(),
+      version: versionStore.getVersion()
+    })
   }
 
   quit () {
@@ -66,12 +89,19 @@ export default class Footer extends React.Component {
   }
 
   renderRightButtonGroup () {
+    const title = this.state.isUpdateAvailable ? 'New version available' : this.state.version
+    const cls = classNames({
+      'btn btn-default': true,
+      'update-available': this.state.isUpdateAvailable,
+      'pull-right': !(platform === 'darwin' || platform === 'win32')
+    })
+
     if (platform === 'darwin' || platform === 'win32') {
       return (
         <div className='btn-group pull-right'>
-          <button className='btn btn-default' onClick={this.openGitHubLink}>
+          <button className={cls} onClick={this.openGitHubLink} title={title}>
             <span className='icon icon-github icon-text' />
-            v{pkg.version}
+            {this.state.version}
           </button>
           <button className='btn btn-default' onClick={this.quit}>
             <span className='icon icon-cancel' />
@@ -80,9 +110,9 @@ export default class Footer extends React.Component {
       )
     } else {
       return (
-        <button className='btn btn-default pull-right' onClick={this.openGitHubLink}>
+        <button className={cls} onClick={this.openGitHubLink}>
           <span className='icon icon-github icon-text' />
-          v{pkg.version}
+          {this.state.version}
         </button>
       )
     }
