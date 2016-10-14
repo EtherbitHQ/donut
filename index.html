@@ -1,55 +1,157 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Donut by harshjv</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dead-simple open-source cryptocurrency tracker!">
+  <meta name="author" content="Harsh Vakharia">
+  <title>Donut</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+  <link href="css/style.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Donut</h1>
-        <p>🏹 Cross-platform cryptocurrency tracker</p>
-        <p class="view"><a href="https://github.com/harshjv/donut">View the Project on GitHub <small>harshjv/donut</small></a></p>
-        <ul>
-          <li><a href="https://github.com/harshjv/donut/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/harshjv/donut/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/harshjv/donut">View On <strong>GitHub</strong></a></li>
+<body id="page-top">
+  <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top"><img src="img/donut.svg"/> Donut</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="page-scroll" target="_blank" href="https://github.com/harshjv/donut/releases/latest">Download</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="#features">Features</a>
+          </li>
+          <li>
+            <a class="page-scroll" href="https://github.com/harshjv/donut">Github</a>
+          </li>
         </ul>
-      </header>
-      <section>
-        <h2>
-<a id="download" class="anchor" href="#download" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Download</h2>
-
-<p>Builds are available for <strong>macOS</strong>, <strong>Debian/Ubuntu</strong>, <strong>FreeBSD</strong> and <strong>Windows</strong>.</p>
-
-<p>Visit <a href="https://github.com/harshjv/donut/releases">Donut GitHub Releases</a></p>
-
-<h2>
-<a id="preview" class="anchor" href="#preview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Preview</h2>
-
-<p><a href="https://github.com/harshjv/donut"><img src="https://github.com/harshjv/donut/blob/master/donut.gif?raw=true" alt="Preview"></a></p>
-
-<h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
-
-<p>MIT</p>
-      </section>
+      </div>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/harshjv">harshjv</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
+  </nav>
+
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-7">
+          <div class="header-content">
+            <div class="header-content-inner">
+              <h1>Dead-simple open-source cryptocurrency tracker!</h1>
+              <img class="icon icons8-Mac-OS-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAC00lEQVRoQ+2a7VEUQRCGuyMQIhAjQCNQIxAjECNQI1AjECMQIxAiUCJQIlAywAhe67GGqq11Zqf39pydo+gq6v7AXD/T3z243RLxtTgkPTSzV2bG57m7v1uiS3MQSQdm9snMngwUf79TIJKOzeyDme2Nbv+lu5/uhEUSBJbIySN3/9E9SHKn7xlLoPuVu+Nui6RJjEj6OoqJodKL3YrD/juIJIIakJxcujtZa7G0ACGIX2Q0/Y2VlsbGzbktQIiN8a1vFaKVa2lkjQszO3b3X4v9aXDAYotIepwyT1YxSYBggW9mduruZ2OAlNXumxkxc70J4GyQ9KVvzewok06pBSj8ecr3U3tC3HDGOPUCAuzHOfETBpFENaYqU50jgoVQiE8AiROUzilfOo+/Jz1XrRQCSTf4JXN7EaClvwMEMP+45PDgKkiCIPOsLZOFcxKk0lq0BrvCPUtuVgPJ1YDWAHwfyWMyNosglW61JUwVYrIgSvq5UnAPL+nC3YcDWPECsxbpKMAfRDuAEgjzM0VvTQm51GTTKInqTOuxpjyv1Y5qHekEZD9S0WsWGXeszS3j7tViHbHIHcgWTXc7XMvMnro7SSckpfTbQ9ZiHnkdoihtUSSVFgbRc7fxe9fuvh89qOeCCEN4J1wCYYpjkFpbGKqIleo6dar75ZB7a5OYWQhmCoTR8lkHIKhQHXd3YR4Z3iXZ9E3O1WoTYi/uNYTJtvY1kB7a+SFEcdCqgbCHYlLsRYrVvtphSurFKjyYUhayEgFhw8i2cM1UzO6YVVBx8V0FAb+DjQqZ6mTKv0MgCWatRjK0SZkDsoaL4VIHkZE3DJKswka95R44/Gw9C6RxvMx67Z0NkmDY/tGLlTIZLsFM8/d9hGyT3lewKD8MTLxQ5WSj98WNQBIMMYNC5PbDpNE5ykf+HSM9W/P3XAoXcpnATyIxMb6BjUF6KfU3etyB9GaRP1HMGkKTrS07AAAAAElFTkSuQmCC" width="45" height="45">
+              <img class="icon icons8-Ubuntu-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAEl0lEQVRoQ9WajVUUMRDHZypQK5CrQKlAqUCpQKhAqECsQKhAqUCoQKjAowKhArGC+H77MuvebnaTzO7xzrzHY+GySf7z8Z+PnMpCI4SwJyJvROStiPBsP90d1iLyKCL3InIjIreqyvPsoXNWiIf/ICJH8eCe5QDyTUQu54ByAYkAPkUAnsOPvXMlIqceQFVAtgigDwwNAQgzLBrFQEIIH0XkTESeF608fxIgjlUVLWVHFkgIgYN/2YIZZQ8XJ3xT1ePc5EkgEcQPEXmdW2jLn6MVtDNqaqNAdgiEyQjqPhgDkwSygyAMzI2qHqS0Pwbk6xP4xK2InKjqOoSA6cJUrwpMNOkzAyAhhJPo3AVruqc84HddM4lWgPm8LFj1sM9mG0BinPj5BBR7oaoIbGOEEM5FBJrPDZx+1RVEH8h3EXmfWyXzOdKGZRr+V1VyKokS56CkNHOBsCQpDalRM1ogIQSSPah2zthYPCFxfAGNk1/tJ0yLz0g2SwdaaZLOLhAk+K50hd68i2gSA5UnwOAHODW/SUNuohAJurXxqhVcAyT6xi8HiD+k7ZF5MCHS+BKtMPeZY7/UK41WDEipk/UXwjyQbF8YrcpTO0d/IW/DH2Ep86sSR+8viVbPDQjaqLFNFmsW6K7aYR0kDkD8zsyFv/k/jp4sppzUv1bVfXWaFZUdh9wYUdK/C0zmXFVPR7RlJlqwTDtlBRAojEheM8h5Glq14ciSk+mGkz0PAVLrHw+qOjBDxzrIYCyeYHolEd7keAEQjyo/qyrO2gynedrrA2JwCOUWIAShKf7GlknUHnvO2OY7jo27VjnQisO81gAJE86RYiY0QePhWlWbdMapVdu2YZ2ev1kGUOy3OSAv+oVMl5lU1eh7ShjFh5kz0QMER2+ygP8JyIZTRzNa2rTuVHXDR2Ohhe8WDzRiSdzYS9QN17HVaS0h5raxZAec/c5LvxsksCv0S61MsVM67lV11Z/s1MrAdKP51uZ+TUD0pCiDmjkeoEYoyXTfEUPY+tibNA64PwKhK1mSNCZTk7gGVeogIc2Yy8riQG1uw7qpYGkaodUDicBGFFuMu5jGk/kumcY3rGdAvC2gLnN1o3FbcKUk2cmU7VIIYJTag85KgeM2fja31KVGx1+ou80kSkpd5i7V1f9X6joctS8oTArSoIbfm2o2d5JUTO3I0Wns7r3ZfIhA2tSjQJ1jU3LasJbT3E6j7d+acL9BV0OfY2DM3q1Bh+Nbg87uWcbiR02Rl27QdTbjIEu1asbAzu00YsL0jlv2SzWxqTFonW5zDBp5kcmI6CUkMN3EtpOHEJYwsZwgiDNnqnods10aICWdxqQfTt1YzWmh5kB4Px+k/LZQ7uqNxkTJ5Yv3YDXvQde0Z5P3iCWXoZiZt7ldc9CpuZMgeDF7Pb1AsJwLZjI2ZU2rv3sIATZDO9umZtsaiiXyL/OFgS6g3q3TXElPvX8ZL0qX/wpHDxDpDE2ImsqyBDgAoOTqrz4V+cjYCWKtjsmRMHrZDUfGZK88AKp9JCfOCIqAxo9VeDybT2HzzaVQLLB4ptKsln7qLH8Bts1aUink3GMAAAAASUVORK5CYII=" width="45" height="45">
+              <img class="icon icons8-Debian" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAEqklEQVRoQ82Z61FVMRCAdytQKlAqECsQKhAqECoQKhAqECpQKhAqECoQKlArACpY57uzmYnn5n3uYcgMP/SeJPtl34nKAsPMdkXklYhsiciVqj6a2VtV/bPAdqsldVMLm9lrEfkoIqci8nayLgABgu/4uxKRa1W92YQMs0Ec4LOIHLuAvXIBCPwj81X1sneB2RpxE/qW0MCILGHOdxE5wRx7FhnSiJntiAhaOOzZrPPbLqBuEIf4WTGjexE5F5E7fGN6ur4Gh0FQ2PfAkOJk/l6LdrpAGiAA+K6qQDQN9zH8iz8i3XQ0wTSDVCCuAfDTZ+Pu4euzxrsUjKq+Ly3aA/I749Q4ZrMGSsK4dgjHKZgLVUVrydEEYmYIinPH46+HzZtNJjqHISSnzAx/SeadLEjIxL4w2iCJhUGsP25xwm4bExE3s1+JuRzaXmrNEsgu9GZGsvoSQ6jqkmF3tVXGCvhpO2UBRdMyM2zy63NDOAgWEJvYgYgQss9TllADeYhMirqImD883GREVZsi20Qr1GZHXsasFZ9JEPcLhKb8YODYOyM+4WUMpknye/IkyZoIw+lmoRK+gn/cNWsER3cINl+BqOq0oq1qxswAwMcIDmtCmxmHReYvwVi0EeaFw6/VYTmNIDSRKowjVSVZNQ8Xkjn7c0p1MwMy5BWS4lrJg1A5kNjJu7URVQHE/SZ/yJ2QmZE3Pvjv2eSbA8GxaJIY3ZnbzCgqb1UVs5o1zAytfvJFznJr5kDiU8hm05SEkYNujQSH6ZqTPJa1jhaQLoH8BOnPQ6Bo0gg+papYwn9jYlrZeqsKoqpN9VjY3TcmsnSZFSE/pUEzi838IAVbcvZgWk+qGtdY1dN1EGJ9tlKtLhJ9EIH0V7+ROnHYXhPhEF7V+ocYJqcNvjGz0D6ceNOW7OVrpjUCEqJMk295FYFPrYVprwqIgFQEq4ScCyBLgFAZU9o0J9GURiblycqsSprbOIibA+p/UNXtRBTC5yhNHnOO62uEA7lwkyom1hxI3IM0mYhvjvqBCAVn0UEL2RwI2gfkaypxWkC6TMQhcHgOg4zcPN8Pg5aa1hq/oLlrKnFyIJzoDz+xbOwuZPagGU4WmOplm5nxLRA0T7QNaKIJopRH4ur3cqS1dWddlenu/JgcQCQ4BOXfVLXhkg4ABj5x2lvelHp2BHjjZfOa07YkNe9rMBM6TZ4YwnPDdDpgK3McvZEpgcRVZ5edJyIVZoOWQ06IqwX6i9nvJiWQ2E+QrenqsqQp11CoFBA+2ba2aHv6Te3yIZhXmNfdm4wINTKnBjK90+qKYCMCjc6pgUzvljCF4mXyqCBz51V7jcRNY/Kmb64gc+dXQTzbxr4ylFfmClqb3wpCpCF0MkhkaKXrja8myNzfm0BcK/HTAm/nXJa9mNEM4jDx7Qo3h3RtL2L0ghDF4helrquiJYm7QFwrMQxB4FBVb5cUsmXtbpAEDP9FsXfWsuFS3wyBRDAUluFqdagb3BTYMEgQwF+1KGW4/geM+9lnD82zQVw7lOiEZ7QDBOGZ16VnGxsBibRD4gztLZ0g1fLsXqPlNDYKEgGFKx/AAMHs6GfulwL7B0unRlHZ9icMAAAAAElFTkSuQmCC" width="45" height="45">
+              <img class="icon icons8-Red-Hat-Filled" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAEnElEQVRoQ+2ZgXEVRwyGpQoIFQRXkLgC4gpIKsCuIHEFmApiVxBcAaaC4AqACmJXEFOBMt+O9mbfvr1b7T0/vwzDzniAYW9Xv/Trl1ZW+UaW7hOHmb0QkR/9jq+q+nlf9z0KEDf4pYj8IiI/+8+SzQDi50ZEblX1YVeAOwExs9cicuoAdrEFQO9U9cPaQ1YBMbM3IvKHiPyw9uKZ7+5E5EJVr0fPHQJiZlDnLxGB+/tcADpT1Y/RS0JAzAzP/+k0ip79GPsuReRtJIe6QMyM5CUK/LnruhcRvM0qFa0nDCc9MItAHMTfnVz46vmSDcxGEcUMHop8ro1xquL1nzoeQtUAMyvfs0CCILifC8JchqYlIKct3+8EpglkAMQXVe1Szo391emEYFBzMP4cL/t9nwK8JTJHLZptAfFLoVPXQDfkEkMiVdvPztKN3b+pKjVEzOydiFCXeguKHtebWkBIbIpcZJ14hf7XqzR8L9e9qk654x0AkUmVvaIYyf9P5FIRuVJV6ti0NoB48hGN0FLV9L2ZYWzuqepvqQd4u7sGorKVmzUQPBItdvRI8B0g0DAnPFTh74DbUqolNIOO/KiqMCKtCYiZQSdoFV0TEAeD3KJItQxHz0v7OtGdjXYJZCQaHNhMuiGrG5vN7EJEEITImmzIHCcB3ze+pBJDlUST4v+hVFIfVb2K3BjdMyDF+chUxzKQlvTRgWLo1luh8hr5cLlLC16DNDOLAheRa1U9zUBaHz6f629mkhLAOdHJn1W5YmZz7JjD9qCqz3XmwztVPeooTK+AAYRo4bGRFoa9VP5bpzTAnnUidAIQitjvjY3dHsrMKEokZ+8iWnH2LS4vmLkoToxwRcXOuXveAiR7oL4kpEredgAI+Z4riin8ASDZqYn35f5Oc3kNkCXZ5R191jMg/7/TFANeNb7pVvjC8/RuWznmEUM968jcAqSnECQwRoQnHUW3i0zzQ6T4/nitCBTOauXmQwRIKn4OZvVcCm/uCsIrf7NgRoFkhzx6AYzStojIowDJ0eFBFJbUUWM7ss8DbOutNBqR8g64iqyuKnxrwC01tqNAvpC8JL6ZIQKoE4CGit5KEERhbhByv1RHWveVT9P6RZemhCLyYUThIqC8JaKpnZtsJvnNno2cuVELFl50nJkH1Kup5wDostMDbmFdAYSqzBQxsjaqvdeL/IzlslYLkXuuPIFn8tKsSd7CU3M4K09dInadAwTutUYxDN5yN8thuddp9k3Fc7fXd0UMG91zlNv4sqFLslrLa2Vos54cCEyarXVnv6Vr3FBA0wQ2R0ZON6JXt9957kvCMlUk4tCt/jct/MhKDBkCMnI6e73JI7qhhB/M12wOk8e7vQLpVOit3mtQQTl+avefDEjx7kFAoBNGbAzuOk+Kll+mx9+TAXGqIavIPU/pjZHnjHrSSZBHJTVzTblR1WlE+6RAOlSj/chGIgy0QqHcSio7msD72F8lOSCQ9zSlj66DAykohRzzG916oh/C8n8AQlfB6AkqrX6BHhSITywpnKe7gDh4jkR/0xXh1kEjEjEwuuc7kKinnmrfNxOR/wAGqC7yuKBpsgAAAABJRU5ErkJggg==" width="45" height="45">
+              <img class="icon icons8-Windows-Client" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABVElEQVRoQ+1ZUQ7CMAiFE+gN9AZ6A72ZevJnMJ3ZpikbTNclj2Q/S9vxeMAoqGxcdOP6CwGszWCTDADYi8hJRI7lOYuIvbuq6kDn1QDUlKyx+ncAAC4i8rZgUe4adb3FAQAwmg+dkqr66CsHAFFlv+0LAQBgFtyZD/YsaD5p7wcy/sDfAQC4lYAx5bogmmzEFgCkKCcAh2s3BrI+SwbIQDJv04XoQnShYbmbTcteqfJRTmc/yCDOBvHkqq2RhavdyJbCTwBLWTJ6DrOQl6ezadk7nwx4FiIDTteDLkQXmvkDYFfCMxjL6Ww5nc3bLTBwHzV3rXU+WVYH8E3T0l5/jXhG7XUbA7XVXp9s6rKwDDisDf+awqiqMfiWrEt6Bvr5hQaAsTYeMdnYKSTufyB0amBTGfL1hygdyCq4ZgDUMNfAbQLAHEJ/HgNzlImsJYCI1Zbc8wSeOQhAf9fazwAAAABJRU5ErkJggg==" width="45" height="45">
+              <br/>
+              <br/>
+              <a href="https://github.com/harshjv/donut/releases/latest" target="_blank" class="btn btn-outline btn-xl page-scroll">Download from GitHub</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="device-container">
+            <div class="device-mockup">
+              <img src="img/donut.png" class="img-responsive" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="section-heading">
+            <h2>Simple. Open-source. Cross-platform.</h2>
+            <p class="text-muted">Oh! And it's free!</p>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="device-container">
+            <div class="device-mockup">
+              <img src="img/donut.png" class="img-responsive" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="feature-item">
+<img class="icon icons8-Open-Source" src="data:image/png;base64,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" width="96" height="96">
+                  <h3>MIT License</h3>
+                  <p class="text-muted">Free for personal &amp; commercial usage.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-item">
+<img class="icon icons8-Coins" src="data:image/png;base64,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" width="96" height="96">
+                  <h3>Over 700 currencies</h3>
+                  <p class="text-muted">From BTC to FirstBlood &amp; ICN to ETH.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="feature-item">
+<img class="icon icons8-Search" src="data:image/png;base64,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" width="96" height="96">
+                  <h3>Quick Search</h3>
+                  <p class="text-muted">Instantly filter out your currency!</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="feature-item">
+<img class="icon icons8-Available-Updates" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAEGElEQVR4Xu2c21HbUBCGd8ltMmMTShAVhBJMBZAKAo+xX6CCpAPyYucRp4KQCqADSAWoBC6eyZALyxxbDoxiW9K5rSz/PDFj2bvn//Y/2iPpiAl/qgqwanQEJwBQLgIAAABlBZTDwwEAoKyAcng4AACUFVAODwcAgLICWfhkcDNMu+t7sbOBAzLFNwe3IiLDtLe+HxMCADwBYP4VoQv61dpOD/kqBggAyAGIDQEAZgCYQJArorXttNe6COkEAJgDIBYEAFgAYFr5Iryf9lrDEE4AgBIAJm4IAwEASgLIpiTvbSoAVAAQAkJQAMmXnwnd/90hlg4JJcy0FWIejf2bPtcKQQBMhP/9kZmjL+1jwfAFwTuAZHCzS0LHzLwRSwytOD7WCl4BJP3RHrMcawmiEdcVgjcApvKZ+JuGCHWIadumegGQzfnnqzDtLIJtA8EPgMHNkInf16ESNXNQAWCqn+XPpebA6xDbRnyTt7MDksHogEmO6iCCTg5yLbLWsb1q6g6gf3vCTDs6g9eO6ia+Hwf0b8+bssKtglOIftBdq+N658zZAeZeapXEm3CsL/G9OKAqACH5SvziU/rhdVonGGXHYfL3+fREdAcIP9+sm/imEMoA8C2+igMuu21n6CGcUwTAts0sytVZjKLE8wksI4BQ4sMBT6pjdiG5t5lwQJEC2ef/AwgvPhwwxwE+28wi/jgH5BwQU3w4IOeAEG0mHFCkQPY5Hk8vKVTTDnM+BzRNkNjjAYDYiufiAQAAKCugHB4OAABlBZTDwwEAoKyAcng4AACUFVAODwesIgCtC19ltI59izW6A4z45kHeZbw3PAug6ziiAUiOZINejk6nT9G5Jl6mmm2OaaQD8uIbYQBgUh7BHZD0R1tE96f5zRsAEAHAPPHhgMfJMZgDijbswQEBHVAkPhwQ0AHTNrOoA6mjA2y2W7mOw+sUVFb8OjrAdnd/LQDMajOLHNCUz9UBrLL45im6tNt2egGJ0xS0qM1sSoUvGocIfU977V2XsVoDWHXxjehCfJh2W5+jAyjTZroktSzf9bHdqrIDIP6kPHw9yAsAVnaTa7lrJ657hK0vxq26C4TkXdpdP7Fil/tSZQdMv29Owsz3Z0T8xkciy/IbvjfsWQMwgq0WBLkWoj1flT8tOCcAYwjmTter0RkTvV2WKq6a53h3/137wMecn4/tDKCJEMb7xIRSYj4jfnYScme/FwD/zgsV3pzleg2lahXX9XivAMZuKAkBACYl4R1AdnIufH0lAAQEUAYCAAQGUNSmAkAEAIsgAEAkAPPaVACICGAWBACIDCC/VgAAJQDTtYLPF9/VdZFVJq8g64AygXGMogMg/qMCcIByNQAAACgroBweDgAAZQWUw8MBAKCsgHJ4OEAZwAPbHR5/B2aCoQAAAABJRU5ErkJggg==" width="96" height="96">
+                  <h3>Updates</h3>
+                  <p class="text-muted">Get updates and features as Donut grows more delicious.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Donut is released under MIT license. Baked by <a href="https://harshjv.github.io/" target="_blank">Harsh Vakharia</a></p>
+      <ul class="list-inline">
+        <li>
+          <a href="https://twitter.com/harshjv" target="_blank">Twitter</a>
+        </li>
+        <li>
+          <a href="https://github.com/harshjv" target="_blank">GitHub</a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/harshjv" target="_blank">LinkedIn</a>
+        </li>
+      </ul>
+      <p>Donut icon is designed by <a href="http://www.freepik.com" target="_blank">Freepik</a>. Apple, Ubuntu, Debian, RedHat, Windows, open-source, coins, search and update icons provided by <a href="https://icons8.com">Icons8</a></p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <script src="js/script.min.js"></script>
+</body>
+
 </html>

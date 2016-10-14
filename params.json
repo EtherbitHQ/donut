@@ -1,6 +1,0 @@
-{
-  "name": "Donut",
-  "tagline": "🏹 Cross-platform cryptocurrency tracker",
-  "body": "## Download\r\n\r\nBuilds are available for **macOS**, **Debian/Ubuntu**, **FreeBSD** and **Windows**.\r\n\r\nVisit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)\r\n\r\n\r\n## Preview\r\n\r\n[![Preview](https://github.com/harshjv/donut/blob/master/donut.gif?raw=true)](https://github.com/harshjv/donut)\r\n\r\n\r\n## License\r\n\r\nMIT",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}
