@@ -24,3 +24,5 @@ build_script:
   - npm run dist
 
 test: off
+
+skip_tags: true
