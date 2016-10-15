@@ -10,7 +10,7 @@ class CoinStoreClass extends BaseStore {
   constructor () {
     super()
     this.coins = {}
-    this.coin_ids = []
+    this.filterableArray = []
     this.arrayAlreadyFilled = false
   }
 
@@ -21,9 +21,9 @@ class CoinStoreClass extends BaseStore {
   getCoinIDs (query = '') {
     console.log(query)
     if (!query || query === '') {
-      return this.coin_ids.map((coin) => coin.id)
+      return this.filterableArray.map((coin) => coin.id)
     } else {
-      const filteredCoins = this.coin_ids.filter(createFilter(query, KEYS_TO_FILTERS))
+      const filteredCoins = this.filterableArray.filter(createFilter(query, KEYS_TO_FILTERS))
       return filteredCoins.map((coin) => coin.id)
     }
   }
@@ -33,7 +33,7 @@ class CoinStoreClass extends BaseStore {
       this.coins[coin.id] = coin
 
       if (!this.arrayAlreadyFilled) {
-        this.coin_ids.push({
+        this.filterableArray.push({
           id: coin.id,
           symbol: coin.symbol,
           rank: coin.rank
@@ -42,7 +42,7 @@ class CoinStoreClass extends BaseStore {
     }
 
     if (!this.arrayAlreadyFilled) {
-      this.coin_ids.sort((a, b) => a.rank - b.rank)
+      this.filterableArray.sort((a, b) => a.rank - b.rank)
       this.arrayAlreadyFilled = true
     }
   }
