@@ -19,7 +19,7 @@ export default class Footer extends React.Component {
     super(props)
 
     this.state = {
-      interval: 60000,
+      interval: intervals[0],
       isUpdateAvailable: versionStore.isUpdateAvailable(),
       version: versionStore.getVersion()
     }
