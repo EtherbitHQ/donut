@@ -13,6 +13,7 @@
   <a href="https://github.com/harshjv/donut/releases"><img src="https://img.shields.io/github/downloads/harshjv/donut/total.svg" alt="Github All Releases"></a>
   <a href="https://github.com/harshjv/donut/blob/master/src/package.json"><img src="https://david-dm.org/harshjv/donut.svg?path=/src" alt="David"></a>
   <a href="https://github.com/harshjv/donut/blob/master/package.json"><img src="https://img.shields.io/david/dev/harshjv/donut.svg" alt="David"></a>
+  <a href="https://github.com/harshjv/donut/releases/latest"><img src="https://img.shields.io/github/release/harshjv/donut.svg" alt="latest release"></a>
   <a href="https://github.com/harshjv/donut/blob/master/LICENSE"><img src="https://img.shields.io/github/license/harshjv/donut.svg" alt="license"></a>
 </p>
 
