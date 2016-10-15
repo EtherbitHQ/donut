@@ -18,9 +18,9 @@ export default class Coin extends React.Component {
 
   shouldComponentUpdate (nextProps, nextState) {
     return (
-      this.state.price_usd !== nextState.price_usd ||
-      this.state.price_btc !== nextState.price_btc ||
-      this.state.percent_change_1h !== nextState.percent_change_1h
+      this.state.coin.price_usd !== nextState.coin.price_usd ||
+      this.state.coin.price_btc !== nextState.coin.price_btc ||
+      this.state.coin.percent_change_1h !== nextState.coin.percent_change_1h
     )
   }
 
