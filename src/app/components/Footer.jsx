@@ -63,7 +63,7 @@ export default class Footer extends React.Component {
   }
 
   openGitHubLink () {
-    if (this.state.isUpdateAvailable) shell.openExternal(`${pkg.homepage}/releases`)
+    if (this.state.isUpdateAvailable) shell.openExternal(`${pkg.homepage}/releases/latest`)
     else shell.openExternal(pkg.homepage)
   }
 
