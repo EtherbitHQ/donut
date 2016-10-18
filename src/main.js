@@ -4,7 +4,7 @@ const { app, ipcMain } = require('electron')
 
 const platform = os.platform()
 
-const width = 380
+const width = 360
 const height = 600
 
 if (platform === 'darwin' || platform === 'win32') {

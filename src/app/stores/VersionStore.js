@@ -1,6 +1,6 @@
 import BaseStore from './BaseStore'
 import AppDispatcher from '../dispatcher/Dispatcher'
-import { ActionTypes } from '../constants/Constants'
+import ActionTypes from '../constants/ActionTypes'
 
 import pkg from '../../package.json'
 

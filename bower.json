@@ -12,7 +12,7 @@
     "bitcoin",
     "ethereum"
   ],
-  "homepage": "https://github.com/harshjv/donut",
+  "homepage": "https://harshjv.github.io/donut/",
   "ignore": [
     "**/.*",
     "node_modules",

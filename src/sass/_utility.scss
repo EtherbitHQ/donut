@@ -10,6 +10,40 @@
   color: #c02a1d;
 }
 
+.positive-bg {
+  -webkit-animation-name: positive-change;
+}
+
+.positive-bg-alt {
+  -webkit-animation-name: positive-change-alt;
+}
+
+.positive-bg, .positive-bg-alt {
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: none;
+  animation-play-state: running;
+}
+
+.negative-bg {
+  -webkit-animation-name: negative-change;
+}
+
+.negative-bg-alt {
+  -webkit-animation-name: negative-change-alt;
+}
+
+.negative-bg, .negative-bg-alt {
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-direction: normal;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: none;
+  animation-play-state: running;
+}
+
 .text-center {
   text-align: center;
 }
@@ -21,4 +55,46 @@
   .icon {
     color: #efefef;
   }
+}
+
+.btn-group-currencies {
+  display: inline-flex;
+}
+
+.online {
+  text-shadow: 0 0 10px rgba(41,160,59,0.5);
+  color: #29a03b!important;
+}
+
+.offline {
+  text-shadow: 0 0 10px rgba(251,47,41,0.5);
+  color: #fb1710!important;
+}
+
+.hide {
+  display: none!important;
+}
+
+@keyframes positive-change {
+	0%   { background-color: #fff; }
+	50%  { background-color: lighten(#27892f, 30%); }
+	100% { background-color: #fff; }
+}
+
+@keyframes positive-change-alt {
+	0%   { background-color: #fff; }
+	50%  { background-color: lighten(#27892f, 30%); }
+	100% { background-color: #fff; }
+}
+
+@keyframes negative-change {
+	0%   { background-color: #fff; }
+	50%  { background-color: lighten(#c02a1d, 30%); }
+	100% { background-color: #fff; }
+}
+
+@keyframes negative-change-alt {
+	0%   { background-color: #fff; }
+	50%  { background-color: lighten(#c02a1d, 30%); }
+	100% { background-color: #fff; }
 }
