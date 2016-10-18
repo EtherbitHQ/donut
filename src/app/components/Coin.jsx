@@ -1,65 +1,113 @@
 import React from 'react'
-import numeral from 'numeral'
 import classNames from 'classnames'
 
-import coinStore from '../stores/CoinStore'
+import CoinStore from '../stores/CoinStore'
+import CurrencyStore from '../stores/CurrencyStore'
+
 import * as CoinUtil from '../utils/coin'
+import * as FormatUtil from '../utils/format'
 
 export default class Coin extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      coin: coinStore.getCoinByID(props.id)
+      coin: CoinStore.getCoinByID(props.id),
+      selectedCurrency: CurrencyStore.getSelectedCurrency(),
+      selectedCurrencyValue: CurrencyStore.getSelectedCurrencyValue(),
+      shouldFlash: false
     }
 
-    this.onChange = this.onChange.bind(this)
+    this.onCoinStateChange = this.onCoinStateChange.bind(this)
+    this.onCurrencyChange = this.onCurrencyChange.bind(this)
   }
 
   shouldComponentUpdate (nextProps, nextState) {
     return (
-      this.state.coin.price_usd !== nextState.coin.price_usd ||
-      this.state.coin.price_btc !== nextState.coin.price_btc ||
-      this.state.coin.percent_change_1h !== nextState.coin.percent_change_1h
+      this.state.coin.price !== nextState.coin.price ||
+      this.state.coin.volume !== nextState.coin.volume ||
+      this.state.coin.perc !== nextState.coin.perc ||
+      this.state.selectedCurrency !== nextState.selectedCurrency ||
+      this.state.selectedCurrencyValue !== nextState.selectedCurrencyValue
     )
   }
 
+  onCurrencyChange () {
+    this.setState({
+      selectedCurrency: CurrencyStore.getSelectedCurrency(),
+      selectedCurrencyValue: CurrencyStore.getSelectedCurrencyValue(),
+      shouldFlash: false
+    })
+  }
+
   componentDidMount () {
-    coinStore.addChangeListener(this.onChange)
+    CoinStore.addChangeListener(this.onCoinStateChange)
+    CurrencyStore.addChangeListener(this.onCurrencyChange)
   }
 
   componentWillUnmount () {
-    coinStore.removeChangeListener(this.onChange)
+    CoinStore.removeChangeListener(this.onCoinStateChange)
+    CurrencyStore.removeChangeListener(this.onCurrencyChange)
   }
 
-  onChange () {
+  onCoinStateChange () {
     this.setState({
-      coin: coinStore.getCoinByID(this.props.id)
+      coin: CoinStore.getCoinByID(this.props.id),
+      shouldFlash: true
     })
   }
 
   render () {
     console.log(`Rendering coin ${this.props.id}`)
 
-    const exists = CoinUtil.coinIcons.indexOf(this.state.coin.symbol.toLowerCase()) !== -1
+    const { shouldFlash, selectedCurrency, selectedCurrencyValue } = this.state
+    const { long, short, price, perc, volume, cap24hrChange } = this.state.coin
+    let safePrice = price
+    if (isNaN(price)) safePrice = 0
 
-    const cls = classNames({
-      [ `cc ${this.state.coin.symbol}` ]: exists,
-      'icon icon-db-shape': !exists,
-      'img-circle media-object pull-left': true
+    const iconClass = CoinUtil.getCoinClass(short)
+    const positiveChangeInPrice = FormatUtil.isPositive(perc)
+    const positiveChangeInVolume = FormatUtil.isPositive(cap24hrChange)
+    const oldBackgroundClass = this.coinRef && this.coinRef.className.split(' ')[1]
+
+    const listClass = classNames({
+      'list-group-item': true,
+      'positive': positiveChangeInPrice,
+      'negative': !positiveChangeInPrice,
+      'positive-bg': shouldFlash && positiveChangeInPrice && oldBackgroundClass !== 'positive-bg',
+      'positive-bg-alt': shouldFlash && positiveChangeInPrice && oldBackgroundClass === 'positive-bg',
+      'negative-bg': shouldFlash && !positiveChangeInPrice && oldBackgroundClass !== 'negative-bg',
+      'negative-bg-alt': shouldFlash && !positiveChangeInPrice && oldBackgroundClass === 'negative-bg'
     })
 
-    let { name, symbol, price_usd, price_btc, percent_change_1h } = this.state.coin
+    const volumeChangeClass = classNames({
+      'pull-right': true,
+      'positive': positiveChangeInVolume,
+      'negative': !positiveChangeInVolume
+    })
+
+    const priceInBTC = CoinStore.getPriceInBTC(safePrice)
+    const priceInSelectedCurrency = safePrice * selectedCurrencyValue
+
+    const formattedBTCPrice = FormatUtil.getFormattedBTCPrice(priceInBTC)
+    const formattedCurrencyPrice = FormatUtil.getFormattedCurrencyPrice(priceInSelectedCurrency)
+    const formattedVolumeChange = FormatUtil.getFormattedPercentage(cap24hrChange)
+    const formattedChangeInPercentage = FormatUtil.getFormattedPercentage(perc)
+    const formattedVolume = FormatUtil.getFormattedVolume(volume)
 
     return (
-      <li className='list-group-item'>
-        <i className={cls} />
+      <li className={listClass} ref={(ref) => this.coinRef = ref}>
+        <i className={iconClass} />
         <div className='media-body'>
-          <strong>{name}
-            <span className='pull-right'>{CoinUtil.displayPriceChange(price_btc, price_usd, percent_change_1h)}</span>
+          <strong>
+            {long}
+            <span className='pull-right'>
+              {formattedBTCPrice} BTC ≈ {formattedCurrencyPrice} {selectedCurrency}
+            </span>
           </strong>
-          <p>{CoinUtil.displaySymbolPercentageChange(symbol, percent_change_1h)}
-            <span className='pull-right text-disabled'>volume ${numeral(this.state.coin['24h_volume_usd']).format('0.0a').toUpperCase()}</span>
+          <p>
+            {short} {formattedChangeInPercentage}
+            <span className={volumeChangeClass}>volume ${formattedVolume} ({formattedVolumeChange})</span>
           </p>
         </div>
       </li>

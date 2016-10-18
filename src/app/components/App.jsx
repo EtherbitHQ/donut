@@ -1,7 +1,9 @@
 import React from 'react'
 import SearchInput from 'react-search-input'
+import ScaleLoader from 'halogen/ScaleLoader'
 
-import coinStore from '../stores/CoinStore'
+import CoinStore from '../stores/CoinStore'
+import Actions from '../actions/Actions'
 
 import Coin from './Coin.jsx'
 import Footer from './Footer.jsx'
@@ -14,42 +16,48 @@ export default class App extends React.Component {
       query: ''
     }
 
-    this.onChange = this.onChange.bind(this)
-    this.searchUpdated = this.searchUpdated.bind(this)
+    this.onCoinStoreUpdate = this.onCoinStoreUpdate.bind(this)
+    this.onSearch = this.onSearch.bind(this)
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (!this.state.coinIDs) return true
+    else return this.state.coinIDs.length !== nextState.coinIDs.length
   }
 
   componentDidMount () {
-    coinStore.addChangeListener(this.onChange)
+    Actions.initSocketConnection()
+    CoinStore.addChangeListener(this.onCoinStoreUpdate)
   }
 
   componentWillUnmount () {
-    coinStore.removeChangeListener(this.onChange)
+    CoinStore.removeChangeListener(this.onCoinStoreUpdate)
   }
 
-  onChange () {
+  onCoinStoreUpdate () {
     this.setState({
-      coin_ids: coinStore.getCoinIDs(this.state.query)
+      coinIDs: CoinStore.getCoinIDs(this.state.query)
     })
   }
 
   renderCoins () {
-    if (this.state.coin_ids) {
-      return this.state.coin_ids.map((coin_id) => <Coin id={coin_id} key={coin_id} />)
+    if (this.state.coinIDs) {
+      return this.state.coinIDs.map((coinID) => <Coin id={coinID} key={coinID} />)
     } else {
       return (
         <li className='list-group-item'>
           <div className='media-body text-center'>
-            <strong>Loading...</strong>
+            <ScaleLoader color='#d1cfd1' size='32px'/>
           </div>
         </li>
       )
     }
   }
 
-  searchUpdated (query) {
+  onSearch (query) {
     this.setState({
       query: query,
-      coin_ids: coinStore.getCoinIDs(query)
+      coinIDs: CoinStore.getCoinIDs(query)
     })
   }
 
@@ -60,7 +68,7 @@ export default class App extends React.Component {
       <div className='window'>
         <header className='toolbar toolbar-header'>
           <span className='icon icon-search' />
-          <SearchInput type='text' className='search-bar' placeholder='Search for a coin e.g. btc or ethereum' onChange={this.searchUpdated} />
+          <SearchInput type='text' className='search-bar' placeholder='Search for a coin or token e.g. btc or digixdao' onChange={this.onSearch} />
         </header>
         <div className='window-content'>
           <ul className='list-group'>

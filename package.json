@@ -1,6 +1,6 @@
 {
   "name": "donut",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Cross platform cryptocurrency tracker",
   "main": "main.js",
   "scripts": {
@@ -31,24 +31,27 @@
     "babelify": "^7.3.0",
     "bower": "^1.7.9",
     "browserify": "^13.1.0",
+    "bufferutil": "^1.2.1",
+    "classnames": "^2.2.5",
     "electron": "^1.4.1",
     "electron-builder": "^7.11.4",
     "envify": "^3.4.1",
+    "flux": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.2",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
-    "uglifyify": "^3.0.3",
-    "vinyl-source-stream": "^1.1.0",
-    "classnames": "^2.2.5",
-    "humanize-duration": "^3.9.1",
-    "flux": "^3.0.0",
+    "halogen": "^0.2.0",
     "keymirror": "^0.1.1",
     "numeral": "^1.5.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-search-input": "^0.10.3",
-    "request": "^2.75.0"
+    "request": "^2.75.0",
+    "socket.io-client": "^1.5.0",
+    "uglifyify": "^3.0.3",
+    "utf-8-validate": "^1.2.1",
+    "vinyl-source-stream": "^1.1.0"
   },
   "build": {
     "appId": "com.harshjv.donut",
@@ -58,7 +61,13 @@
     },
     "linux": {
       "category": "Utility",
-      "target": [ "AppImage", "deb", "rpm", "freebsd", "zip" ]
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "freebsd",
+        "zip"
+      ]
     }
   }
 }
