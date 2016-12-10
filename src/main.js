@@ -19,6 +19,14 @@ if (platform === 'darwin' || platform === 'win32') {
   })
 
   mb.on('after-create-window', () => mb.window.setResizable(false))
+
+  app.on('ready', () => {
+    mb.tray.setTitle('Donut')
+
+    ipcMain.on('update-btc-price', (event, price) => {
+      mb.tray.setTitle(price)
+    })
+  })
 } else {
   const { BrowserWindow } = require('electron')
 
@@ -39,6 +47,4 @@ if (platform === 'darwin' || platform === 'win32') {
   })
 }
 
-ipcMain.on('quit', () => {
-  app.quit()
-})
+ipcMain.on('quit', () => app.quit())

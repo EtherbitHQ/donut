@@ -1,11 +1,17 @@
 import React from 'react'
 import classNames from 'classnames'
 
+const { ipcRenderer } = window.require('electron')
+
 import CoinStore from '../stores/CoinStore'
 import CurrencyStore from '../stores/CurrencyStore'
 
 import * as CoinUtil from '../utils/coin'
 import * as FormatUtil from '../utils/format'
+
+function updateTitle (price, currency) {
+  ipcRenderer.send('update-btc-price', `${price} ${currency}`)
+}
 
 export default class Coin extends React.Component {
   constructor (props) {
@@ -62,8 +68,7 @@ export default class Coin extends React.Component {
 
     const { shouldFlash, selectedCurrency, selectedCurrencyValue } = this.state
     const { long, short, price, perc, volume, cap24hrChange } = this.state.coin
-    let safePrice = price
-    if (isNaN(price)) safePrice = 0
+    const safePrice = isNaN(price) ? 0 : price
 
     const iconClass = CoinUtil.getCoinClass(short)
     const positiveChangeInPrice = FormatUtil.isPositive(perc)
@@ -95,8 +100,10 @@ export default class Coin extends React.Component {
     const formattedChangeInPercentage = FormatUtil.getFormattedPercentage(perc)
     const formattedVolume = FormatUtil.getFormattedVolume(volume)
 
+    if (short === 'BTC') updateTitle(formattedCurrencyPrice, selectedCurrency)
+
     return (
-      <li className={listClass} ref={(ref) => this.coinRef = ref}>
+      <li className={listClass} ref={(ref) => { this.coinRef = ref }}>
         <i className={iconClass} />
         <div className='media-body'>
           <strong>
