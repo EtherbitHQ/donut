@@ -17,6 +17,5 @@
 }
 
 .toolbar-footer {
-  overflow-x: auto;
-  white-space: nowrap;
+  -webkit-app-region: no-drag!important;
 }

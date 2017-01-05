@@ -41,11 +41,11 @@ CurrencyStore.setMaxListeners(1000)
 
 const register = {
   [ ActionTypes.CURRENCY_DATA ]: (data) => {
-    CurrencyStore.syncCurrencies(data.currency_data.rates)
+    CurrencyStore.syncCurrencies(data.currencyData.rates)
     CurrencyStore.emitChange()
   },
   [ ActionTypes.SELECT_CURRENCY ]: (data) => {
-    CurrencyStore.setSelectedCurrency(data.selected_currency)
+    CurrencyStore.setSelectedCurrency(data.selectedCurrency)
     CurrencyStore.emitChange()
   }
 }

@@ -9,8 +9,8 @@ import CurrencyStore from '../stores/CurrencyStore'
 import * as CoinUtil from '../utils/coin'
 import * as FormatUtil from '../utils/format'
 
-function updateTitle (price, currency) {
-  ipcRenderer.send('update-btc-price', `${price} ${currency}`)
+function updateTitle (shortPrice, price, currency) {
+  ipcRenderer.send('update-btc-price', { shortPrice, price, currency })
 }
 
 export default class Coin extends React.Component {
@@ -96,11 +96,12 @@ export default class Coin extends React.Component {
 
     const formattedBTCPrice = FormatUtil.getFormattedBTCPrice(priceInBTC)
     const formattedCurrencyPrice = FormatUtil.getFormattedCurrencyPrice(priceInSelectedCurrency)
+    const formattedCurrencyPriceShort = FormatUtil.getFormattedCurrencyPriceShort(priceInSelectedCurrency)
     const formattedVolumeChange = FormatUtil.getFormattedPercentage(cap24hrChange)
     const formattedChangeInPercentage = FormatUtil.getFormattedPercentage(perc)
     const formattedVolume = FormatUtil.getFormattedVolume(volume)
 
-    if (short === 'BTC') updateTitle(formattedCurrencyPrice, selectedCurrency)
+    if (short === 'BTC') updateTitle(formattedCurrencyPriceShort, formattedCurrencyPrice, selectedCurrency)
 
     return (
       <li className={listClass} ref={(ref) => { this.coinRef = ref }}>

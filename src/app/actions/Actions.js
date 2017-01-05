@@ -52,7 +52,7 @@ export default {
   fetchCurrencyData () {
     console.log('Fetching currency data')
 
-    api.currencyAPI((error, currency_data) => {
+    api.currencyAPI((error, currencyData) => {
       if (error) throw new Error(error)
 
       console.log('Currency data fetched successfully')
@@ -60,7 +60,7 @@ export default {
       AppDispatcher.dispatch({
         type: ActionTypes.CURRENCY_DATA,
         data: {
-          currency_data: currency_data
+          currencyData: currencyData
         }
       })
     })
@@ -69,7 +69,7 @@ export default {
   fetchCoinData () {
     console.log('Fetching coin data')
 
-    api.frontAPI((error, coin_data) => {
+    api.frontAPI((error, coinData) => {
       if (error) throw new Error(error)
 
       console.log('Coin map fetched successfully')
@@ -77,7 +77,7 @@ export default {
       AppDispatcher.dispatch({
         type: ActionTypes.COIN_DATA,
         data: {
-          coin_data: coin_data
+          coinData: coinData
         }
       })
     })

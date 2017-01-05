@@ -57,8 +57,18 @@
   }
 }
 
-.btn-group-currencies {
-  display: inline-flex;
+.currency-list {
+  height: 23px;
+  width: auto;
+  border-top-color: #c2c0c2;
+  border-right-color: #c2c0c2;
+  border-bottom-color: #a19fa1;
+  border-left-color: #c2c0c2;
+  margin-right: 4px;
+}
+
+.btn-group-actions {
+  margin-bottom: -1px;
 }
 
 .online {

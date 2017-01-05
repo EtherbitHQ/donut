@@ -60,7 +60,7 @@ CoinStore.setMaxListeners(1000)
 
 const register = {
   [ ActionTypes.COIN_DATA ]: (data) => {
-    CoinStore.syncCoins(data.coin_data)
+    CoinStore.syncCoins(data.coinData)
     CoinStore.emitChange()
   },
   [ ActionTypes.NEW_TRADE ]: (data) => {

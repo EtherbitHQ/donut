@@ -23,8 +23,9 @@ if (platform === 'darwin' || platform === 'win32') {
   app.on('ready', () => {
     mb.tray.setTitle('Donut')
 
-    ipcMain.on('update-btc-price', (event, price) => {
-      mb.tray.setTitle(price)
+    ipcMain.on('update-btc-price', (event, { shortPrice, price, currency }) => {
+      mb.tray.setTitle(`${shortPrice} ${currency}`)
+      mb.tray.setToolTip(`${price} ${currency}`)
     })
   })
 } else {

@@ -47,7 +47,7 @@ export default class App extends React.Component {
       return (
         <li className='list-group-item'>
           <div className='media-body text-center'>
-            <ScaleLoader color='#d1cfd1' size='32px'/>
+            <ScaleLoader color='#d1cfd1' size='32px' />
           </div>
         </li>
       )

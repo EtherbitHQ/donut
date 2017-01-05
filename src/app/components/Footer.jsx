@@ -32,7 +32,7 @@ export default class Footer extends React.Component {
     this.openGitHubLink = this.openGitHubLink.bind(this)
     this.onVersionChange = this.onVersionChange.bind(this)
     this.onCurrencyChange = this.onCurrencyChange.bind(this)
-    this.setCurrency = this.setCurrency.bind(this)
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this)
     this.onAppStatusChange = this.onAppStatusChange.bind(this)
   }
 
@@ -91,32 +91,25 @@ export default class Footer extends React.Component {
     else shell.openExternal(pkg.repository)
   }
 
-  setCurrency (currency) {
-    return () => {
-      if (this.state.selectedCurrency === currency) return
+  handleCurrencyChange (event) {
+    const currency = event.target.value
 
-      AppDispatcher.dispatch({
-        type: ActionTypes.SELECT_CURRENCY,
-        data: {
-          selected_currency: currency
-        }
-      })
-    }
+    AppDispatcher.dispatch({
+      type: ActionTypes.SELECT_CURRENCY,
+      data: {
+        selectedCurrency: currency
+      }
+    })
   }
 
   render () {
     console.log('Rendering footer')
 
-    const { currencies, isUpdateAvailable, online, version } = this.state
+    const { currencies, isUpdateAvailable, online, version, selectedCurrency } = this.state
 
     const currencyKeys = Object.keys(currencies)
     const currencyList = currencyKeys.map((currency) => {
-      const currencyClass = classNames({
-        'btn btn-default': true,
-        'active': this.state.selectedCurrency === currency
-      })
-
-      return <button className={currencyClass} key={currency} onClick={this.setCurrency(currency)}>{currency}</button>
+      return <option key={currency} value={currency}>{currency}</option>
     })
 
     const updateTitle = isUpdateAvailable ? 'Update available. Click this button to download new version.' : version
@@ -137,7 +130,7 @@ export default class Footer extends React.Component {
     return (
       <footer className='toolbar toolbar-footer'>
         <div className='toolbar-actions'>
-          <div className='btn-group'>
+          <div className='btn-group btn-group-actions'>
             <button className='btn btn-default' title={onlineOfflineTitle}>
               <span className={onlineOfflineClass} />
             </button>
@@ -148,9 +141,9 @@ export default class Footer extends React.Component {
               <span className='icon icon-cancel' />
             </button> : ''}
           </div>
-          <div className='btn-group btn-group-currencies'>
+          <select className='form-control currency-list pull-right' value={selectedCurrency} onChange={this.handleCurrencyChange}>
             {currencyList}
-          </div>
+          </select>
         </div>
       </footer>
     )
