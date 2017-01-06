@@ -1,6 +1,6 @@
 {
   "name": "donut",
-  "version": "2.2.1-alpha.1",
+  "version": "2.2.1",
   "description": "Cross platform cryptocurrency tracker",
   "main": "main.js",
   "scripts": {

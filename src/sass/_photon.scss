@@ -16,6 +16,6 @@
   border-left-color: #c2c0c2;
 }
 
-.toolbar-footer {
-  -webkit-app-region: no-drag!important;
+.toolbar-footer, .toolbar-actions {
+  -webkit-app-region: no-drag;
 }

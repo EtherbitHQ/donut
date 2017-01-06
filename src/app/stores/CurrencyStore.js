@@ -10,7 +10,7 @@ class CurrencyStoreClass extends BaseStore {
   }
 
   getCurrencies () {
-    return this.currencyMap
+    return Object.keys(this.currencyMap)
   }
 
   syncCurrencies (currencies) {

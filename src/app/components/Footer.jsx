@@ -107,8 +107,7 @@ export default class Footer extends React.Component {
 
     const { currencies, isUpdateAvailable, online, version, selectedCurrency } = this.state
 
-    const currencyKeys = Object.keys(currencies)
-    const currencyList = currencyKeys.map((currency) => {
+    const currencyList = currencies.map((currency) => {
       return <option key={currency} value={currency}>{currency}</option>
     })
 
@@ -141,9 +140,9 @@ export default class Footer extends React.Component {
               <span className='icon icon-cancel' />
             </button> : ''}
           </div>
-          <select className='form-control currency-list pull-right' value={selectedCurrency} onChange={this.handleCurrencyChange}>
+          {currencyList.length > 0 ? <select className='form-control currency-list pull-right' value={selectedCurrency} onChange={this.handleCurrencyChange}>
             {currencyList}
-          </select>
+          </select> : ''}
         </div>
       </footer>
     )
