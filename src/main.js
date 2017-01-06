@@ -4,21 +4,27 @@ const { app, ipcMain } = require('electron')
 
 const platform = os.platform()
 
-const width = 360
-const height = 600
+// All platforms
+const browserWindowConfig = {
+  icon: path.join(__dirname, 'icon.png'),
+  width: 360,
+  height: 600,
+  alwaysOnTop: platform === 'win32',
+  fullscreen: false,
+  fullscreenable: false,
+  resizable: false
+}
+
+// Menubar (For macOS and Windows)
+const menuBarConfig = {
+  preloadWindow: true,
+  showDockIcon: false
+}
 
 if (platform === 'darwin' || platform === 'win32') {
   const menubar = require('menubar')
 
-  const mb = menubar({
-    preloadWindow: true,
-    showDockIcon: false,
-    icon: path.join(__dirname, 'icon.png'),
-    width: width,
-    height: height
-  })
-
-  mb.on('after-create-window', () => mb.window.setResizable(false))
+  const mb = menubar(Object.assign(browserWindowConfig, menuBarConfig))
 
   app.on('ready', () => {
     mb.tray.setTitle('Donut')
@@ -32,13 +38,7 @@ if (platform === 'darwin' || platform === 'win32') {
   const { BrowserWindow } = require('electron')
 
   app.on('ready', () => {
-    let win = new BrowserWindow({
-      width: width,
-      height: height,
-      fullscreen: false,
-      fullscreenable: false,
-      resizable: false
-    })
+    let win = new BrowserWindow(browserWindowConfig)
 
     win.on('closed', () => {
       win = null
