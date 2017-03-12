@@ -1,7 +1,7 @@
+import Debug from 'debug'
+
 import React from 'react'
 import classNames from 'classnames'
-
-const { ipcRenderer } = window.require('electron')
 
 import CoinStore from '../stores/CoinStore'
 import CurrencyStore from '../stores/CurrencyStore'
@@ -9,8 +9,11 @@ import CurrencyStore from '../stores/CurrencyStore'
 import * as CoinUtil from '../utils/coin'
 import * as FormatUtil from '../utils/format'
 
-function updateTitle (shortPrice, price, currency) {
-  ipcRenderer.send('update-btc-price', { shortPrice, price, currency })
+const { ipcRenderer } = window.require('electron')
+const debug = Debug('donut:jsx:coin')
+
+function updateTitle (coin, price, currency, positive) {
+  ipcRenderer.send('update-menubar-title', { coin, price, currency, positive })
 }
 
 export default class Coin extends React.Component {
@@ -19,17 +22,21 @@ export default class Coin extends React.Component {
 
     this.state = {
       coin: CoinStore.getCoinByID(props.id),
+      selectedCoin: CurrencyStore.getSelectedCoin(),
       selectedCurrency: CurrencyStore.getSelectedCurrency(),
       selectedCurrencyValue: CurrencyStore.getSelectedCurrencyValue(),
       shouldFlash: false
     }
 
+    this.changeSelectedCoin = this.props.changeSelectedCoin.bind(this)
     this.onCoinStateChange = this.onCoinStateChange.bind(this)
     this.onCurrencyChange = this.onCurrencyChange.bind(this)
   }
 
   shouldComponentUpdate (nextProps, nextState) {
     return (
+      ((this.state.coin.short === this.state.selectedCoin) && (this.state.selectedCoin !== nextState.selectedCoin)) ||
+      ((this.state.coin.short !== this.state.selectedCoin) && (this.state.coin.short === nextState.selectedCoin)) ||
       this.state.coin.price !== nextState.coin.price ||
       this.state.coin.volume !== nextState.coin.volume ||
       this.state.coin.perc !== nextState.coin.perc ||
@@ -40,6 +47,7 @@ export default class Coin extends React.Component {
 
   onCurrencyChange () {
     this.setState({
+      selectedCoin: CurrencyStore.getSelectedCoin(),
       selectedCurrency: CurrencyStore.getSelectedCurrency(),
       selectedCurrencyValue: CurrencyStore.getSelectedCurrencyValue(),
       shouldFlash: false
@@ -64,9 +72,9 @@ export default class Coin extends React.Component {
   }
 
   render () {
-    console.log(`Rendering coin ${this.props.id}`)
+    debug(`Rendering coin ${this.props.id}`)
 
-    const { shouldFlash, selectedCurrency, selectedCurrencyValue } = this.state
+    const { shouldFlash, selectedCurrency, selectedCurrencyValue, selectedCoin } = this.state
     const { long, short, price, perc, volume, cap24hrChange } = this.state.coin
     const safePrice = isNaN(price) ? 0 : price
 
@@ -76,6 +84,7 @@ export default class Coin extends React.Component {
     const oldBackgroundClass = this.coinRef && this.coinRef.className.split(' ')[1]
 
     const listClass = classNames({
+      'coin-selected': short === selectedCoin,
       'list-group-item': true,
       'positive': positiveChangeInPrice,
       'negative': !positiveChangeInPrice,
@@ -96,21 +105,22 @@ export default class Coin extends React.Component {
 
     const formattedBTCPrice = FormatUtil.getFormattedBTCPrice(priceInBTC)
     const formattedCurrencyPrice = FormatUtil.getFormattedCurrencyPrice(priceInSelectedCurrency)
-    const formattedCurrencyPriceShort = FormatUtil.getFormattedCurrencyPriceShort(priceInSelectedCurrency)
     const formattedVolumeChange = FormatUtil.getFormattedPercentage(cap24hrChange)
     const formattedChangeInPercentage = FormatUtil.getFormattedPercentage(perc)
     const formattedVolume = FormatUtil.getFormattedVolume(volume)
 
-    if (short === 'BTC') updateTitle(formattedCurrencyPriceShort, formattedCurrencyPrice, selectedCurrency)
+    const titlePrice = selectedCurrency === 'BTC' ? formattedBTCPrice : formattedCurrencyPrice
+
+    if (short === selectedCoin) updateTitle(selectedCoin, titlePrice, selectedCurrency, positiveChangeInVolume)
 
     return (
-      <li className={listClass} ref={(ref) => { this.coinRef = ref }}>
+      <li className={listClass} ref={(ref) => { this.coinRef = ref }} onClick={this.changeSelectedCoin}>
         <i className={iconClass} />
         <div className='media-body'>
           <strong>
             {long}
             <span className='pull-right'>
-              {formattedBTCPrice} BTC ≈ {formattedCurrencyPrice} {selectedCurrency}
+              {formattedBTCPrice} BTC{selectedCurrency !== 'BTC' ? ` ≈ ${formattedCurrencyPrice} ${selectedCurrency}` : ''}
             </span>
           </strong>
           <p>

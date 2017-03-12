@@ -26,7 +26,7 @@ const paths = {
     destination: './app/fonts/'
   },
   files: {
-    source: [ './src/package.json', './src/index.html', './src/main.js', './src/icon.png', './src/icon@2x.png' ],
+    source: [ './src/package.json', './src/index.html', './src/main.js', './src/*.png' ],
     destination: './app/'
   }
 }
@@ -34,52 +34,62 @@ const paths = {
 gulp.task('copy-fonts', () => gulp.src(paths.fonts.source).pipe(gulp.dest(paths.fonts.destination)))
 gulp.task('copy-files', () => gulp.src(paths.files.source).pipe(gulp.dest(paths.files.destination)))
 
-gulp.task('jsx', () => browserify({
-  entries: paths.jsx.source,
-  browserField: false,
-  builtins: false,
-  commondir: false,
-  insertGlobalVars: {
-    process: undefined,
-    global: undefined,
-    'Buffer.isBuffer': undefined,
-    Buffer: undefined
-  }
+gulp.task('jsx', () => {
+  return browserify({
+    entries: paths.jsx.source,
+    browserField: false,
+    builtins: false,
+    commondir: false,
+    insertGlobalVars: {
+      process: undefined,
+      global: undefined,
+      'Buffer.isBuffer': undefined,
+      Buffer: undefined
+    }
+  })
+  .transform('babelify')
+  .bundle()
+  .pipe(source(paths.jsx.name))
+  .pipe(gulp.dest(paths.jsx.destination))
 })
-                      .transform('babelify')
-                      .bundle()
-                      .pipe(source(paths.jsx.name))
-                      .pipe(gulp.dest(paths.jsx.destination)))
 
-gulp.task('sass', () => gulp.src(paths.sass.source)
-                       .pipe(sass())
-                       .pipe(rename(paths.sass.name))
-                       .pipe(gulp.dest(paths.sass.destination)))
-
-gulp.task('jsx:build', () => browserify({
-  entries: paths.jsx.source,
-  browserField: false,
-  builtins: false,
-  commondir: false,
-  insertGlobalVars: {
-    process: undefined,
-    global: undefined,
-    'Buffer.isBuffer': undefined,
-    Buffer: undefined
-  }
+gulp.task('jsx:build', () => {
+  return browserify({
+    entries: paths.jsx.source,
+    browserField: false,
+    builtins: false,
+    commondir: false,
+    insertGlobalVars: {
+      process: undefined,
+      global: undefined,
+      'Buffer.isBuffer': undefined,
+      Buffer: undefined
+    }
+  })
+  .transform('babelify')
+  .transform(envify({ NODE_ENV: 'production' }))
+  .transform({ global: true }, 'uglifyify')
+  .bundle()
+  .pipe(source(paths.jsx.name))
+  .pipe(gulp.dest(paths.jsx.destination))
 })
-                            .transform('babelify')
-                            .transform(envify({ NODE_ENV: 'production' }))
-                            .transform({ global: true }, 'uglifyify')
-                            .bundle()
-                            .pipe(source(paths.jsx.name))
-                            .pipe(gulp.dest(paths.jsx.destination)))
 
-gulp.task('sass:build', () => gulp.src(paths.sass.source)
-                                  .pipe(sass())
-                                  .pipe(cssnano())
-                                  .pipe(rename(paths.sass.name))
-                                  .pipe(gulp.dest(paths.sass.destination)))
+gulp.task('sass', () => {
+  return gulp
+  .src(paths.sass.source)
+  .pipe(sass())
+  .pipe(rename(paths.sass.name))
+  .pipe(gulp.dest(paths.sass.destination))
+})
+
+gulp.task('sass:build', () => {
+  return gulp
+  .src(paths.sass.source)
+  .pipe(sass())
+  .pipe(cssnano())
+  .pipe(rename(paths.sass.name))
+  .pipe(gulp.dest(paths.sass.destination))
+})
 
 gulp.task('jsx:watch', () => gulp.watch(paths.jsx.watch, ['jsx']))
 gulp.task('sass:watch', () => gulp.watch(paths.sass.watch, ['sass']))

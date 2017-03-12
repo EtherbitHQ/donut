@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const { webFrame } = window.require('electron')
-
 import App from './components/App.jsx'
 import Actions from './actions/Actions'
+
+const { webFrame } = window.require('electron')
 
 Actions.fetchCurrencyData()
 Actions.fetchCoinData()

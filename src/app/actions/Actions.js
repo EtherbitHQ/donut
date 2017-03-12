@@ -2,21 +2,20 @@
 
 import io from 'socket.io-client'
 
-const { shell } = window.require('electron')
+import Debug from 'debug'
+import CheckForUpdate from 'check-for-update'
 
 import ActionTypes from '../constants/ActionTypes'
 import AppDispatcher from '../dispatcher/Dispatcher'
-
 import api from '../utils/api'
-import checkForUpdate from '../utils/checkForUpdate'
-import pkg from '../../package.json'
+
+const { shell } = window.require('electron')
+const debug = Debug('donut:actions')
 
 const dispatchTrade = (trade) => {
   AppDispatcher.dispatch({
     type: ActionTypes.NEW_TRADE,
-    data: {
-      trade: trade
-    }
+    data: { trade }
   })
 }
 
@@ -37,7 +36,7 @@ export default {
     let socket = io.connect('http://coincap.io')
 
     socket.on('connect', () => {
-      console.log('Connected to CoinCap server')
+      debug('Connected to CoinCap server')
 
       AppDispatcher.dispatch({
         type: ActionTypes.ONLINE
@@ -50,63 +49,57 @@ export default {
   },
 
   fetchCurrencyData () {
-    console.log('Fetching currency data')
+    debug('Fetching currency data')
 
     api.currencyAPI((error, currencyData) => {
       if (error) throw new Error(error)
 
-      console.log('Currency data fetched successfully')
+      debug('Currency data fetched successfully')
 
       AppDispatcher.dispatch({
         type: ActionTypes.CURRENCY_DATA,
-        data: {
-          currencyData: currencyData
-        }
+        data: { currencyData }
       })
     })
   },
 
   fetchCoinData () {
-    console.log('Fetching coin data')
+    debug('Fetching coin data')
 
     api.frontAPI((error, coinData) => {
       if (error) throw new Error(error)
 
-      console.log('Coin map fetched successfully')
+      debug('Coin map fetched successfully')
 
       AppDispatcher.dispatch({
         type: ActionTypes.COIN_DATA,
-        data: {
-          coinData: coinData
-        }
+        data: { coinData }
       })
     })
   },
 
   checkForUpdate () {
-    console.log('Checking for update')
-
-    checkForUpdate((error, updateAvailable) => {
-      if (error) throw new Error(error)
-
-      console.log('Successfully checked for update')
-
-      if (updateAvailable) {
-        console.log('Update available', updateAvailable)
-
-        const updateNotification = new Notification('New version available', {
-          body: `Click here to download ${updateAvailable}. You have v${pkg.version}.`
-        })
-
-        updateNotification.onclick = () => shell.openExternal(`${pkg.repository}/releases/latest`)
-
-        AppDispatcher.dispatch({
-          type: ActionTypes.UPDATE_AVAILABLE,
-          data: {
-            newVersion: updateAvailable
-          }
-        })
-      }
+    const cfu = new CheckForUpdate({
+      packageJSON: require('../../package.json'),
+      checkOnLaunch: true,
+      intervalHrs: 12
     })
+
+    cfu.on('update_available', ({ currentVersion, newVersion, repoURL, updateURL }) => {
+      debug('Update available', newVersion)
+
+      const updateNotification = new Notification('New version available', {
+        body: `Click here to download v${newVersion}. You have v${currentVersion}.`
+      })
+
+      updateNotification.onclick = () => shell.openExternal(updateURL)
+
+      AppDispatcher.dispatch({
+        type: ActionTypes.UPDATE_AVAILABLE,
+        data: { newVersion }
+      })
+    })
+
+    cfu.start()
   }
 }

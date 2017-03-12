@@ -1,13 +1,16 @@
+$positive-bg: #27892f;
+$negative-bg: #c02a1d;
+
 .text-disabled {
   color: #777;
 }
 
 .positive {
-  color: #27892f;
+  color: $positive-bg;
 }
 
 .negative {
-  color: #c02a1d;
+  color: $negative-bg;
 }
 
 .positive-bg {
@@ -85,26 +88,49 @@
   display: none!important;
 }
 
+.wait-loader {
+  display: table;
+  height: 100%;
+  width: 100%;
+
+  > div {
+    display: table-cell;
+    height: 100%;
+    width: 100%;
+    vertical-align: middle;
+  }
+}
+
+.coin-selected {
+  background: #eee !important;
+  border-left: 4px solid;
+}
+
 @keyframes positive-change {
 	0%   { background-color: #fff; }
-	50%  { background-color: lighten(#27892f, 30%); }
+	50%  { background-color: lighten($positive-bg, 30%); }
 	100% { background-color: #fff; }
 }
 
 @keyframes positive-change-alt {
 	0%   { background-color: #fff; }
-	50%  { background-color: lighten(#27892f, 30%); }
+	50%  { background-color: lighten($positive-bg, 30%); }
 	100% { background-color: #fff; }
 }
 
 @keyframes negative-change {
 	0%   { background-color: #fff; }
-	50%  { background-color: lighten(#c02a1d, 30%); }
+	50%  { background-color: lighten($negative-bg, 30%); }
 	100% { background-color: #fff; }
 }
 
 @keyframes negative-change-alt {
 	0%   { background-color: #fff; }
-	50%  { background-color: lighten(#c02a1d, 30%); }
+	50%  { background-color: lighten($negative-bg, 30%); }
 	100% { background-color: #fff; }
+}
+
+.coin-icon {
+  min-height: 100px;
+  min-width: 100px;
 }

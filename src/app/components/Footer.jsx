@@ -1,9 +1,9 @@
 import os from 'os'
 
+import Debug from 'debug'
+
 import React from 'react'
 import classNames from 'classnames'
-
-const { ipcRenderer, shell } = window.require('electron')
 
 import VersionStore from '../stores/VersionStore'
 import CurrencyStore from '../stores/CurrencyStore'
@@ -13,6 +13,9 @@ import AppDispatcher from '../dispatcher/Dispatcher'
 import ActionTypes from '../constants/ActionTypes'
 import Actions from '../actions/Actions'
 import pkg from '../../package.json'
+
+const { ipcRenderer, shell } = window.require('electron')
+const debug = Debug('donut:jsx:footer')
 
 const platform = os.platform()
 
@@ -40,7 +43,6 @@ export default class Footer extends React.Component {
     return (
       this.state.isUpdateAvailable !== nextState.isUpdateAvailable ||
       this.state.version !== nextState.version ||
-      this.state.currencies !== nextState.currencies ||
       this.state.selectedCurrency !== nextState.selectedCurrency ||
       this.state.online !== nextState.online
     )
@@ -103,7 +105,7 @@ export default class Footer extends React.Component {
   }
 
   render () {
-    console.log('Rendering footer')
+    debug('Rendering footer')
 
     const { currencies, isUpdateAvailable, online, version, selectedCurrency } = this.state
 

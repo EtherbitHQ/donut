@@ -21,17 +21,38 @@ const menuBarConfig = {
   showDockIcon: false
 }
 
+let pos
+let show = false
+
 if (platform === 'darwin' || platform === 'win32') {
   const menubar = require('menubar')
 
   const mb = menubar(Object.assign(browserWindowConfig, menuBarConfig))
 
+  const setIcon = () => {
+    const icon = pos === undefined ? 'icon' : (pos ? 'up' : 'down')
+    const suffix = show ? 'light' : 'dark'
+
+    mb.tray.setImage(path.join(__dirname, `${icon}-${suffix}.png`))
+  }
+
   app.on('ready', () => {
     mb.tray.setTitle('Donut')
 
-    ipcMain.on('update-btc-price', (event, { shortPrice, price, currency }) => {
-      mb.tray.setTitle(`${shortPrice} ${currency}`)
-      mb.tray.setToolTip(`${price} ${currency}`)
+    mb.on('show', () => {
+      show = true
+      setIcon()
+    })
+
+    mb.on('hide', () => {
+      show = false
+      setIcon()
+    })
+
+    ipcMain.on('update-menubar-title', (event, { coin, price, currency, positive }) => {
+      pos = positive
+      mb.tray.setTitle(`${coin} ${price} ${currency}`)
+      setIcon()
     })
   })
 } else {

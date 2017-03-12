@@ -1,8 +1,12 @@
-import {createFilter} from 'react-search-input'
+import { createFilter } from 'react-search-input'
+
+import Debug from 'debug'
 
 import BaseStore from './BaseStore'
 import AppDispatcher from '../dispatcher/Dispatcher'
 import ActionTypes from '../constants/ActionTypes'
+
+const debug = Debug('donut:store:coin')
 
 const KEYS_TO_FILTERS = ['long', 'short']
 
@@ -64,7 +68,7 @@ const register = {
     CoinStore.emitChange()
   },
   [ ActionTypes.NEW_TRADE ]: (data) => {
-    if (!data.trade) console.log(data)
+    if (!data.trade) debug(data)
     else {
       CoinStore.newTrade(data.trade.message)
       CoinStore.emitChange()

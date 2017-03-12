@@ -7,6 +7,7 @@ class CurrencyStoreClass extends BaseStore {
     super()
     this.currencyMap = {}
     this.selectedCurrency = 'USD'
+    this.selectedCoin = 'BTC'
   }
 
   getCurrencies () {
@@ -15,8 +16,17 @@ class CurrencyStoreClass extends BaseStore {
 
   syncCurrencies (currencies) {
     this.currencyMap = Object.assign({
+      BTC: 1,
       USD: 1
     }, currencies)
+  }
+
+  getSelectedCoin () {
+    return this.selectedCoin
+  }
+
+  setSelectedCoin (coin) {
+    this.selectedCoin = coin
   }
 
   setSelectedCurrency (currency) {
@@ -46,6 +56,10 @@ const register = {
   },
   [ ActionTypes.SELECT_CURRENCY ]: (data) => {
     CurrencyStore.setSelectedCurrency(data.selectedCurrency)
+    CurrencyStore.emitChange()
+  },
+  [ ActionTypes.SELECT_COIN ]: (data) => {
+    CurrencyStore.setSelectedCoin(data.coin)
     CurrencyStore.emitChange()
   }
 }

@@ -7,5 +7,6 @@ export default keyMirror({
   CURRENCY_DATA: null,
   SELECT_CURRENCY: null,
   ONLINE: null,
-  OFFLINE: null
+  OFFLINE: null,
+  SELECT_COIN: null
 })

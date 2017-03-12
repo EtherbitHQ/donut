@@ -20,7 +20,7 @@
 
 ## Preview
 
-[![Preview](./donut.gif)](https://github.com/harshjv/donut)
+[![Preview](./preview.gif)](https://github.com/harshjv/donut)
 
 
 ## Download

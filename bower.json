@@ -1,7 +1,7 @@
 {
   "name": "donut",
+  "private": true,
   "description": "Cryptocurrency Tracker",
-  "main": "main.js",
   "authors": [
     "Harsh Vakharia <harshjv@gmail.com>"
   ],
@@ -21,7 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "cryptocoins": "allienworks/cryptocoins",
+    "cryptocoins": "allienworks/cryptocoins#v2.1",
     "photon": "connors/photon#^0.1.2-alpha"
   }
 }
