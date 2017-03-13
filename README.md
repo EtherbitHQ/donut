@@ -1,12 +1,14 @@
-<h1 align="center">
-  <a href="https://github.com/harshjv/donut"><img src="./build/icon.ico" alt="Donut" width="200"></a>
+<div align="center">
+
+<h1>
+  <img src="./build/icon.ico" alt="Donut" width="200">
   <br>
   Donut
 </h1>
 
-<h4 align="center">Cross platform cryptocurrency tracker.</h4>
+<h4>Cross platform cryptocurrency tracker.</h4>
 
-<p align="center">
+<p>
   <a href="https://travis-ci.org/harshjv/donut"><img src="https://travis-ci.org/harshjv/donut.svg?branch=master" alt="Build Status"></a>
   <a href="https://ci.appveyor.com/project/harshjv/donut"><img src="https://ci.appveyor.com/api/projects/status/f5ldn38ocfgvv1xk?svg=true" alt="Build status"></a>
   <a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
@@ -17,22 +19,16 @@
   <a href="https://github.com/harshjv/donut/blob/master/LICENSE"><img src="https://img.shields.io/github/license/harshjv/donut.svg" alt="license"></a>
 </p>
 
-
-<div align="center">
-
 <h3>Preview</h3>
-
-[![Preview](./preview.gif)](https://github.com/harshjv/donut)
+<img src="./preview.gif" alt="Donut Preview" />
 
 <h3>Download</h3>
-
-<p>Builds are available for **macOS**, **Debian/Ubuntu**, **FreeBSD** and **Windows**. Visit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)</p>
+<p>Builds are available for <strong>macOS</strong>, <strong>Debian/Ubuntu</strong>, <strong>FreeBSD</strong> and <strong>Windows</strong>. Visit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)</p>
 
 
 <h3>License</h3>
-
 <p>MIT</p>
 
-<small>*Donut icon is designed by [Freepik](http://www.flaticon.com/authors/freepik)*</small>
+<small><em>Donut icon is designed by <a href="http://www.flaticon.com/authors/freepik" target="_blank">Freepik</a></em></small>
 
 </div>
