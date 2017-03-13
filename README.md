@@ -23,7 +23,7 @@
 <img src="./preview.gif" alt="Donut Preview" />
 
 <h3>Download</h3>
-<p>Builds are available for <strong>macOS</strong>, <strong>Debian/Ubuntu</strong>, <strong>FreeBSD</strong> and <strong>Windows</strong>. Visit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)</p>
+<p>Builds are available for <strong>macOS</strong>, <strong>Debian/Ubuntu</strong>, <strong>FreeBSD</strong> and <strong>Windows</strong>. Visit <a href="https://github.com/harshjv/donut/releases">Donut GitHub Releases</a></p>
 
 
 <h3>License</h3>
