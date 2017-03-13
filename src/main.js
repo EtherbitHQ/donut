@@ -4,9 +4,19 @@ const { app, ipcMain } = require('electron')
 
 const platform = os.platform()
 
+let pos
+let show = false
+
+const getIcon = () => {
+  const icon = pos === undefined ? 'icon' : (pos ? 'up' : 'down')
+  const type = show ? 'light' : 'dark'
+
+  return path.join(__dirname, 'icons', type, `${icon}.png`)
+}
+
 // All platforms
 const browserWindowConfig = {
-  icon: path.join(__dirname, 'icon.png'),
+  icon: getIcon(),
   width: 360,
   height: 600,
   alwaysOnTop: platform === 'win32',
@@ -21,38 +31,28 @@ const menuBarConfig = {
   showDockIcon: false
 }
 
-let pos
-let show = false
-
 if (platform === 'darwin' || platform === 'win32') {
   const menubar = require('menubar')
 
   const mb = menubar(Object.assign(browserWindowConfig, menuBarConfig))
-
-  const setIcon = () => {
-    const icon = pos === undefined ? 'icon' : (pos ? 'up' : 'down')
-    const suffix = show ? 'light' : 'dark'
-
-    mb.tray.setImage(path.join(__dirname, `${icon}-${suffix}.png`))
-  }
 
   app.on('ready', () => {
     mb.tray.setTitle('Donut')
 
     mb.on('show', () => {
       show = true
-      setIcon()
+      mb.tray.setImage(getIcon())
     })
 
     mb.on('hide', () => {
       show = false
-      setIcon()
+      mb.tray.setImage(getIcon())
     })
 
     ipcMain.on('update-menubar-title', (event, { coin, price, currency, positive }) => {
       pos = positive
       mb.tray.setTitle(`${coin} ${price} ${currency}`)
-      setIcon()
+      mb.tray.setImage(getIcon())
     })
   })
 } else {

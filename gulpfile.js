@@ -8,35 +8,42 @@ const sass = require('gulp-sass')
 const cssnano = require('gulp-cssnano')
 const rename = require('gulp-rename')
 
-const paths = {
+const config = {
   jsx: {
     source: './src/app/index.jsx',
-    watch: ['./src/app/**/*.js*'],
+    watch: [ './src/app/**/*.js*' ],
     destination: './app/',
     name: 'app.js'
   },
   sass: {
     source: './src/sass/style.scss',
-    watch: ['./src/sass/**/*.scss'],
+    watch: [ './src/sass/**/*.scss' ],
     destination: './app/',
     name: 'style.css'
   },
-  fonts: {
-    source: [ './bower_components/photon/fonts/*.woff', './bower_components/cryptocoins/fonts/*.woff' ],
-    destination: './app/fonts/'
-  },
-  files: {
-    source: [ './src/package.json', './src/index.html', './src/main.js', './src/*.png' ],
-    destination: './app/'
+  resources: {
+    fonts: {
+      source: [ './bower_components/photon/fonts/*.woff', './bower_components/cryptocoins/fonts/*.woff' ],
+      destination: './app/fonts/'
+    },
+    icons: {
+      source: [ './src/icons/**/*.png' ],
+      destination: './app/icons/'
+    },
+    files: {
+      source: [ './src/package.json', './src/index.html', './src/main.js' ],
+      destination: './app/'
+    }
   }
 }
 
-gulp.task('copy-fonts', () => gulp.src(paths.fonts.source).pipe(gulp.dest(paths.fonts.destination)))
-gulp.task('copy-files', () => gulp.src(paths.files.source).pipe(gulp.dest(paths.files.destination)))
+gulp.task('copy-icons', () => gulp.src(config.resources.icons.source).pipe(gulp.dest(config.resources.icons.destination)))
+gulp.task('copy-fonts', () => gulp.src(config.resources.fonts.source).pipe(gulp.dest(config.resources.fonts.destination)))
+gulp.task('copy-files', () => gulp.src(config.resources.files.source).pipe(gulp.dest(config.resources.files.destination)))
 
 gulp.task('jsx', () => {
   return browserify({
-    entries: paths.jsx.source,
+    entries: config.jsx.source,
     browserField: false,
     builtins: false,
     commondir: false,
@@ -49,13 +56,13 @@ gulp.task('jsx', () => {
   })
   .transform('babelify')
   .bundle()
-  .pipe(source(paths.jsx.name))
-  .pipe(gulp.dest(paths.jsx.destination))
+  .pipe(source(config.jsx.name))
+  .pipe(gulp.dest(config.jsx.destination))
 })
 
 gulp.task('jsx:build', () => {
   return browserify({
-    entries: paths.jsx.source,
+    entries: config.jsx.source,
     browserField: false,
     builtins: false,
     commondir: false,
@@ -70,32 +77,32 @@ gulp.task('jsx:build', () => {
   .transform(envify({ NODE_ENV: 'production' }))
   .transform({ global: true }, 'uglifyify')
   .bundle()
-  .pipe(source(paths.jsx.name))
-  .pipe(gulp.dest(paths.jsx.destination))
+  .pipe(source(config.jsx.name))
+  .pipe(gulp.dest(config.jsx.destination))
 })
 
 gulp.task('sass', () => {
   return gulp
-  .src(paths.sass.source)
+  .src(config.sass.source)
   .pipe(sass())
-  .pipe(rename(paths.sass.name))
-  .pipe(gulp.dest(paths.sass.destination))
+  .pipe(rename(config.sass.name))
+  .pipe(gulp.dest(config.sass.destination))
 })
 
 gulp.task('sass:build', () => {
   return gulp
-  .src(paths.sass.source)
+  .src(config.sass.source)
   .pipe(sass())
   .pipe(cssnano())
-  .pipe(rename(paths.sass.name))
-  .pipe(gulp.dest(paths.sass.destination))
+  .pipe(rename(config.sass.name))
+  .pipe(gulp.dest(config.sass.destination))
 })
 
-gulp.task('jsx:watch', () => gulp.watch(paths.jsx.watch, ['jsx']))
-gulp.task('sass:watch', () => gulp.watch(paths.sass.watch, ['sass']))
+gulp.task('jsx:watch', () => gulp.watch(config.jsx.watch, [ 'jsx' ]))
+gulp.task('sass:watch', () => gulp.watch(config.sass.watch, [ 'sass' ]))
 
-gulp.task('setup', ['copy-resources', 'build'])
-gulp.task('copy-resources', ['copy-fonts', 'copy-files'])
-gulp.task('watch', ['jsx:watch', 'sass:watch'])
-gulp.task('build', ['jsx:build', 'sass:build'])
-gulp.task('default', ['jsx', 'sass', 'watch'])
+gulp.task('setup', [ 'copy-resources', 'build' ])
+gulp.task('copy-resources', [ 'copy-fonts', 'copy-files', 'copy-icons' ])
+gulp.task('watch', [ 'jsx:watch', 'sass:watch' ])
+gulp.task('build', [ 'jsx:build', 'sass:build' ])
+gulp.task('default', [ 'jsx', 'sass', 'watch' ])

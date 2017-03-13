@@ -46,6 +46,7 @@
     "regenerator": "^0.9.7",
     "request": "^2.75.0",
     "socket.io-client": "^1.5.0",
+    "standard": "^9.0.1",
     "uglifyify": "^3.0.3",
     "utf-8-validate": "^2.0.0",
     "vinyl-source-stream": "^1.1.0"
