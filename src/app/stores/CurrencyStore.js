@@ -2,12 +2,14 @@ import BaseStore from './BaseStore'
 import AppDispatcher from '../dispatcher/Dispatcher'
 import ActionTypes from '../constants/ActionTypes'
 
+const settings = window.require('electron-settings')
+
 class CurrencyStoreClass extends BaseStore {
   constructor () {
     super()
     this.currencyMap = {}
-    this.selectedCurrency = 'USD'
-    this.selectedCoin = 'BTC'
+    this.selectedCurrency = settings.getSync('selectedCurrency') || 'USD'
+    this.selectedCoin = settings.getSync('selectedCoin') || 'BTC'
   }
 
   getCurrencies () {
@@ -27,10 +29,14 @@ class CurrencyStoreClass extends BaseStore {
 
   setSelectedCoin (coin) {
     this.selectedCoin = coin
+
+    settings.setSync('selectedCoin', coin)
   }
 
   setSelectedCurrency (currency) {
     this.selectedCurrency = currency
+
+    settings.setSync('selectedCurrency', currency)
   }
 
   getSelectedCurrency () {

@@ -1,7 +1,6 @@
 const gulp = require('gulp')
 
 const browserify = require('browserify')
-const envify = require('envify/custom')
 const source = require('vinyl-source-stream')
 
 const sass = require('gulp-sass')
@@ -60,26 +59,7 @@ gulp.task('jsx', () => {
   .pipe(gulp.dest(config.jsx.destination))
 })
 
-gulp.task('jsx:build', () => {
-  return browserify({
-    entries: config.jsx.source,
-    browserField: false,
-    builtins: false,
-    commondir: false,
-    insertGlobalVars: {
-      process: undefined,
-      global: undefined,
-      'Buffer.isBuffer': undefined,
-      Buffer: undefined
-    }
-  })
-  .transform('babelify')
-  .transform(envify({ NODE_ENV: 'production' }))
-  .transform({ global: true }, 'uglifyify')
-  .bundle()
-  .pipe(source(config.jsx.name))
-  .pipe(gulp.dest(config.jsx.destination))
-})
+gulp.task('jsx:build', [ 'jsx' ])
 
 gulp.task('sass', () => {
   return gulp
