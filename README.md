@@ -18,20 +18,21 @@
 </p>
 
 
-## Preview
+<div align="center">
+
+<h3>Preview</h3>
 
 [![Preview](./preview.gif)](https://github.com/harshjv/donut)
 
+<h3>Download</h3>
 
-## Download
-
-Builds are available for **macOS**, **Debian/Ubuntu**, **FreeBSD** and **Windows**.
-
-Visit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)
+<p>Builds are available for **macOS**, **Debian/Ubuntu**, **FreeBSD** and **Windows**. Visit [Donut GitHub Releases](https://github.com/harshjv/donut/releases)</p>
 
 
-## License
+<h3>License</h3>
 
-MIT
+<p>MIT</p>
 
-*Donut icon is designed by [Freepik](http://www.flaticon.com/authors/freepik)*
+<small>*Donut icon is designed by [Freepik](http://www.flaticon.com/authors/freepik)*</small>
+
+</div>
