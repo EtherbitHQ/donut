@@ -4,7 +4,7 @@
   "description": "Cross platform cryptocurrency tracker",
   "homepage": "https://harshjv.github.io/donut/",
   "license": "MIT",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "main": "main.js",
   "repository": "https://github.com/harshjv/donut",
   "keywords": [
