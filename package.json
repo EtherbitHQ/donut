@@ -11,8 +11,11 @@
   },
   "author": {
     "name": "Harsh Vakharia",
-    "email": "harshjv@gmail.com",
-    "url": "https://harshjv.github.io"
+    "email": "harsh@etherbit.in",
+    "url": "https://hv.pizza"
+  },
+  "engines": {
+    "node": "^6.12.3"
   },
   "license": "MIT",
   "devDependencies": {
@@ -51,7 +54,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "build": {
-    "appId": "com.harshjv.donut",
+    "appId": "in.etherbit.donut",
     "productName": "Donut",
     "mac": {
       "category": "public.app-category.productivity"

@@ -2,11 +2,11 @@
   "name": "donut",
   "productName": "Donut",
   "description": "Cross platform cryptocurrency tracker",
-  "homepage": "https://harshjv.github.io/donut/",
+  "homepage": "https://www.etherbit.in/open-source/donut",
   "license": "MIT",
   "version": "2.4.0",
   "main": "main.js",
-  "repository": "https://github.com/harshjv/donut",
+  "repository": "https://github.com/etherbithq/donut",
   "keywords": [
     "donut",
     "cryptocurrency",
@@ -16,10 +16,13 @@
     "altcoin",
     "ethereum"
   ],
+  "engines": {
+    "node": "^6.12.3"
+  },
   "author": {
     "name": "Harsh Vakharia",
-    "email": "harshjv@gmail.com",
-    "url": "https://harshjv.github.io"
+    "email": "harsh@etherbit.in",
+    "url": "https://hv.pizza"
   },
   "dependencies": {
     "electron-settings": "^2.2.2",

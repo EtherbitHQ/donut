@@ -3,7 +3,7 @@
   "private": true,
   "description": "Cryptocurrency Tracker",
   "authors": [
-    "Harsh Vakharia <harshjv@gmail.com>"
+    "Harsh Vakharia <harsh@etherbit.in>"
   ],
   "license": "MIT",
   "keywords": [
@@ -12,7 +12,7 @@
     "bitcoin",
     "ethereum"
   ],
-  "homepage": "https://harshjv.github.io/donut/",
+  "homepage": "https://www.etherbit.in/open-source/donut",
   "ignore": [
     "**/.*",
     "node_modules",
